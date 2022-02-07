@@ -1,11 +1,11 @@
-- name: add-release-tag
+name: add-release-tag
 
 on:
   pull_request:
     # PRが閉じたタイミングで実行
     types:
       - closed
-    # mainブランチに対して設定
+    # mainブランチのみを対象とする
     branches:
       - main
 
