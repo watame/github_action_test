@@ -32,6 +32,7 @@ jobs:
         # どんな内容のリリースタグを作成するか
         with:
           # タグ名
+          # tag_nameは半角英数時のみしか利用できない
           tag_name: ${{ env.RELEASE_TAG }}
           release_name: Release ${{ env.RELEASE_TAG }}
           body: ${{ env.BODY }}
