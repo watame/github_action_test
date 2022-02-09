@@ -5,6 +5,7 @@ on:
     # mainブランチのみを対象とする
     branches:
       - main
+      - release*
 
 jobs:
   release:
