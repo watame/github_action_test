@@ -1,10 +1,7 @@
 name: add-release-tag
 
 on:
-  pull_request:
-    # PRが閉じたタイミングで実行
-    types:
-      - closed
+  push:
     # mainブランチのみを対象とする
     branches:
       - main
@@ -13,11 +10,11 @@ jobs:
   release:
     # https://docs.github.com/ja/actions/using-workflows/events-that-trigger-workflows#check_run
     # githubのpull_requestがマージされた場合にのみ実施する
-    if: github.event.pull_request.merged == true && startsWith(github.head_ref, 'release')
+    # if: github.event.pull_request.merged == true && startsWith(github.head_ref, 'release')
     runs-on: ubuntu-latest
     steps:
       # releaseタグを作成する対象のコードを取得するため、checkout
-      - name: Checkout code
+      - name: Check out repository code
         uses: action/checkout@v2
       - name: Create Release
         id: create_release
