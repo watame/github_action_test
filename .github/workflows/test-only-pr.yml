@@ -2,6 +2,8 @@ name: test-only-pr
 
 on:
   pull_request:
+    # https://docs.github.com/ja/actions/using-workflows/events-that-trigger-workflows#pull_request
+    types: [opened, reopened, synchronize, ready_for_review]
 
 jobs:
   test:
