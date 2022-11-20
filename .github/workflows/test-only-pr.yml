@@ -1,0 +1,15 @@
+name: test-only-pr
+
+on:
+  pull_request:
+
+jobs:
+  test:
+    # https://docs.github.com/ja/actions/learn-github-actions/expressions#literals
+    # https://zenn.dev/nekomaho/articles/1eef80533785c9
+    # PRがドラフト以外の場合だけ、以下の処理を行う
+    if: github.event.pull_request.draft == false
+    runs-on: ubuntu-latest
+    steps:
+      - name: echo only PR
+        run: echo "This is Opened PR!!"
