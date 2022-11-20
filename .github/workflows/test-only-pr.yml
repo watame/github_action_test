@@ -12,4 +12,4 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: echo only PR
-        run: echo "This is Opened PR!!"
+        run: echo "*** This is Opened PR!! ***"
