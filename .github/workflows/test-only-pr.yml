@@ -13,10 +13,9 @@ jobs:
     # https://dev.classmethod.jp/articles/how-to-get-a-ref-branch-within-a-workflow-execution-in-github-actions/
     # https://github.com/orgs/community/discussions/25641
     if: |
-      ${{ github.event.pull_request.draft == false
-        && (!startsWith(github.head_ref, 'release'))
-        && (!startsWith(github.head_ref, 'test'))
-      }}
+      github.event.pull_request.draft == false
+      && !startsWith(github.head_ref, 'release')
+      && !startsWith(github.head_ref, 'test')
     runs-on: ubuntu-latest
     steps:
       - name: echo condition
