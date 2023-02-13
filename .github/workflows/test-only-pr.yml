@@ -10,8 +10,26 @@ jobs:
     # https://docs.github.com/ja/actions/learn-github-actions/expressions#literals
     # https://zenn.dev/nekomaho/articles/1eef80533785c9
     # PRがドラフト以外の場合だけ、以下の処理を行う
-    if: ${{ github.event.pull_request.draft == false }}
+    # https://dev.classmethod.jp/articles/how-to-get-a-ref-branch-within-a-workflow-execution-in-github-actions/
+    # https://github.com/orgs/community/discussions/25641
+    if: |
+      github.event.pull_request.draft == false
+      && !startsWith(github.head_ref, 'release')
+      && !startsWith(github.head_ref, 'test')
     runs-on: ubuntu-latest
     steps:
+      - name: echo condition
+        run: |
+          echo '1' ${{ github.event.pull_request.draft == false }}
+          echo '2' ${{ !startsWith(github.head_ref, 'release') }}
+          echo '3' ${{ !startsWith(github.head_ref, 'test') }}
+          echo '4' ${{ github.event.pull_request.draft == false && !startsWith(github.head_ref, 'release') && !startsWith(github.head_ref, 'test')}}
       - name: echo only PR
         run: echo "*** This is Opened PR!! ***"
+      - name: echo github ref
+        run: |
+          echo '1' $GITHUB_REF
+          echo '2' ${{ github.ref }}
+          echo '3' ${{ github.ref_name }}
+          echo '4' ${{ github.head_ref }}
+          echo '5' ${{ github.base_ref }}
