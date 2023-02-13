@@ -19,6 +19,12 @@ jobs:
       }}
     runs-on: ubuntu-latest
     steps:
+      - name: echo condition
+        run: |
+          echo '1' ${{ github.event.pull_request.draft == false }}
+          echo '2' ${{ !startsWith(github.head_ref, 'release') }}
+          echo '3' ${{ !startsWith(github.head_ref, 'test') }}
+          echo '4' ${{ github.event.pull_request.draft == false && !startsWith(github.head_ref, 'release') && !startsWith(github.head_ref, 'test')}}
       - name: echo only PR
         run: echo "*** This is Opened PR!! ***"
       - name: echo github ref
