@@ -5,8 +5,8 @@ on:
     # https://docs.github.com/ja/actions/using-workflows/events-that-trigger-workflows#pull_request
     types: [opened, reopened, synchronize, ready_for_review]
     branches-ignore:
-      - "release/**"
-      - "test/**"
+      - "release/*"
+      - "test/*"
     tags:
       - "*"
 
