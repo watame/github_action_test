@@ -9,9 +9,14 @@ jobs:
   test:
     # https://docs.github.com/ja/actions/learn-github-actions/expressions#literals
     # https://zenn.dev/nekomaho/articles/1eef80533785c9
-    # PRがドラフト以外の場合だけ、以下の処理を行う
-    # https://dev.classmethod.jp/articles/how-to-get-a-ref-branch-within-a-workflow-execution-in-github-actions/
-    # https://github.com/orgs/community/discussions/25641
+    # PRが下記の条件の場合だけテストを実施
+    #   - PRがドラフトではない
+    #   - ブランチ名が release から始まらない
+    #   - ブランチ名が test から始まらない
+    #       -> https://dev.classmethod.jp/articles/how-to-get-a-ref-branch-within-a-workflow-execution-in-github-actions/
+    # if条件は自動的にGitHubActions側で式として解釈されるため、${{}}を明示的に指定する必要はない
+    #   -> https://docs.github.com/ja/actions/learn-github-actions/expressions#about-expressions
+    #      https://github.com/orgs/community/discussions/25641
     if: |
       github.event.pull_request.draft == false
       && !startsWith(github.head_ref, 'release')
